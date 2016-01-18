@@ -25,7 +25,7 @@ type Betting struct {
 	SessionKey string
 }
 
-func NewBet(apiKey string) *Betting {
+func NewBet(apiKey string) BettingFactory {
 	return &Betting{
 		ApiKey: apiKey,
 	}
