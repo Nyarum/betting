@@ -9,3 +9,8 @@
 ### Wrapper based on
 - go-curl (Session)
 - fasthttp
+
+### Examples
+```
+You can find in tests :)
+```
