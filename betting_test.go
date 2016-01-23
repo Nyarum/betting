@@ -53,3 +53,21 @@ func TestRequestAppKeys(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func BenchmarkRequestKeys(b *testing.B) {
+	config := loadConfig()
+
+	bet := NewBet(config.ApiKey)
+
+	err := bet.GetSession(config.CertPem, config.CertKey, config.Login, config.Password)
+	if err != nil {
+		b.Error(err)
+	}
+
+	for n := 0; n < b.N; n++ {
+		_, err = bet.GetAppKeys()
+		if err != nil {
+			b.Error(err)
+		}
+	}
+}
