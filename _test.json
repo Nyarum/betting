@@ -1,0 +1,7 @@
+{
+	"api_key": "string",
+	"login": "string",
+	"password": "string",
+	"cert_pem": "path",
+	"cert_key": "path"
+}
