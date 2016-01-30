@@ -11,7 +11,6 @@
 - Nya author ^_^
 
 ### Wrapper based on
-- go-curl (Session)
 - fasthttp
 
 ### Examples
