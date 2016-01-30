@@ -8,6 +8,8 @@
 ### Features
 - Get Session
 - Get Developer Keys
+- Get Account Details
+- Get Account Funds
 - Enums ([Details](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums))
 
 ### Links for help
