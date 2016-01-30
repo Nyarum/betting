@@ -3,5 +3,6 @@
 	"login": "string",
 	"password": "string",
 	"cert_pem": "path",
-	"cert_key": "path"
+	"cert_key": "path",
+	"debug": "bool"
 }

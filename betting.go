@@ -17,7 +17,9 @@ const (
 
 type BettingFactory interface {
 	GetSession(string, string, string, string) error
-	GetAppKeys() (*DeveloperApp, error)
+	GetAppKeys() ([]DeveloperAppKey, error)
+	GetAccountDetails() (*AccountDetails, error)
+	GetAccountFunds() (*AccountFunds, error)
 }
 
 type Betting struct {

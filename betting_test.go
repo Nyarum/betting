@@ -13,6 +13,7 @@ type Test struct {
 	Password string `json:"password"`
 	CertPem  string `json:"cert_pem"`
 	CertKey  string `json:"cert_key"`
+	Debug    bool   `json:"debug"`
 }
 
 func loadConfig() (test Test) {
@@ -48,9 +49,53 @@ func TestRequestAppKeys(t *testing.T) {
 		t.Error(err)
 	}
 
-	_, err = bet.GetAppKeys()
+	keys, err := bet.GetAppKeys()
 	if err != nil {
 		t.Error(err)
+	}
+
+	if config.Debug {
+		log.Println(keys)
+	}
+}
+
+func TestRequestAccountDetails(t *testing.T) {
+	config := loadConfig()
+
+	bet := NewBet(config.ApiKey)
+
+	err := bet.GetSession(config.CertPem, config.CertKey, config.Login, config.Password)
+	if err != nil {
+		t.Error(err)
+	}
+
+	details, err := bet.GetAccountDetails()
+	if err != nil {
+		t.Error(err)
+	}
+
+	if config.Debug {
+		log.Println(details)
+	}
+}
+
+func TestRequestAccountFunds(t *testing.T) {
+	config := loadConfig()
+
+	bet := NewBet(config.ApiKey)
+
+	err := bet.GetSession(config.CertPem, config.CertKey, config.Login, config.Password)
+	if err != nil {
+		t.Error(err)
+	}
+
+	funds, err := bet.GetAccountFunds()
+	if err != nil {
+		t.Error(err)
+	}
+
+	if config.Debug {
+		log.Println(funds)
 	}
 }
 
