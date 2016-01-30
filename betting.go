@@ -10,7 +10,7 @@ import (
 type BetURL string
 
 const (
-	CertURL           = "https://identitysso.betfair.com/api/certlogin"
+	CertURL           = "https://identitysso-api.betfair.com/api/certlogin"
 	AccountURL BetURL = "https://api.betfair.com/exchange/account/json-rpc/v1"
 	BettingURL BetURL = "https://api.betfair.com/exchange/betting/json-rpc/v1"
 )

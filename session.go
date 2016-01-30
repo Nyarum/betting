@@ -1,10 +1,12 @@
 package betting
 
 import (
+	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 
-	"github.com/andelf/go-curl"
+	"github.com/valyala/fasthttp"
 )
 
 type Session struct {
@@ -13,37 +15,37 @@ type Session struct {
 }
 
 func (b *Betting) GetSession(pemCert, keyCert, login, password string) error {
-	var (
-		session *Session = &Session{}
-		err     error
-		easy    *curl.CURL = curl.EasyInit()
-	)
-	defer easy.Cleanup()
+	var session *Session = &Session{}
 
-	if easy != nil {
-		easy.Setopt(curl.OPT_URL, CertURL)
-		easy.Setopt(curl.OPT_POST, true)
-		easy.Setopt(curl.OPT_VERBOSE, false)
+	cert, err := tls.LoadX509KeyPair(pemCert, keyCert)
+	if err != nil {
+		return err
+	}
 
-		easy.Setopt(curl.OPT_SSLCERT, pemCert)
-		easy.Setopt(curl.OPT_SSLKEY, keyCert)
-		easy.Setopt(curl.OPT_SSL_VERIFYHOST, 2)
-		easy.Setopt(curl.OPT_SSL_VERIFYPEER, 1)
-		easy.Setopt(curl.OPT_HTTPHEADER, []string{
-			"Content-Type: application/x-www-form-urlencoded",
-			"X-Application: " + b.ApiKey,
-		})
+	client := fasthttp.Client{TLSConfig: &tls.Config{Certificates: []tls.Certificate{cert}, InsecureSkipVerify: true}}
 
-		easy.Setopt(curl.OPT_POSTFIELDS, `username=`+login+`&password=`+password)
-		bodyFunc := func(buf []byte, userdata interface{}) bool {
-			err = json.Unmarshal(buf, session)
+	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
+	req.SetRequestURI(CertURL)
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("X-Application", b.ApiKey)
+	req.Header.SetMethod("POST")
 
-			return true
-		}
+	bufferString := bytes.NewBuffer([]byte{})
+	bufferString.WriteString(`username=`)
+	bufferString.WriteString(login)
+	bufferString.WriteString(`&password=`)
+	bufferString.WriteString(password)
 
-		easy.Setopt(curl.OPT_WRITEFUNCTION, bodyFunc)
+	req.SetBody(bufferString.Bytes())
 
-		err = easy.Perform()
+	err = client.Do(req, resp)
+	if err != nil {
+		return err
+	}
+
+	err = json.Unmarshal(resp.Body(), session)
+	if err != nil {
+		return err
 	}
 
 	if session != nil {
@@ -57,5 +59,5 @@ func (b *Betting) GetSession(pemCert, keyCert, login, password string) error {
 		}
 	}
 
-	return err
+	return nil
 }
