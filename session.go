@@ -49,13 +49,17 @@ func (b *Betting) GetSession(pemCert, keyCert, login, password string) error {
 	}
 
 	if session != nil {
-		switch session.LoginStatus {
-		case "SUCCESS":
+		var loginStatus LoginStatus
+		err := loginStatus.Unmarshal(session.LoginStatus)
+		if err != nil {
+			return err
+		}
+
+		switch loginStatus {
+		case LS_SUCCESS:
 			b.SessionKey = session.SessionToken
-		case "":
-			err = errors.New("Error in certificates")
 		default:
-			err = errors.New(session.LoginStatus)
+			err = errors.New(loginStatus.String())
 		}
 	}
 

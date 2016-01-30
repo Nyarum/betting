@@ -126,13 +126,13 @@ func (code LoginStatus) String() string {
 	return lsItems[code]
 }
 
-func (code *LoginStatus) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := lsMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownLoginStatus
+func (code *LoginStatus) Unmarshal(enum string) error {
+	val, ok := lsMap[enum]
+	if !ok {
+		return ErrUnknownLoginStatus
 	}
-	return err
+
+	*code = val
+
+	return nil
 }
