@@ -7,6 +7,7 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
+// BetURL type of all betfair urls
 type BetURL string
 
 const (
@@ -15,24 +16,20 @@ const (
 	BettingURL BetURL = "https://api.betfair.com/exchange/betting/json-rpc/v1"
 )
 
-type BettingFactory interface {
-	GetSession(string, string, string, string) error
-	GetAppKeys() ([]DeveloperAppKey, error)
-	GetAccountDetails() (*AccountDetails, error)
-	GetAccountFunds() (*AccountFunds, error)
-}
-
+// Betting main struct of all method for working with betfair
 type Betting struct {
 	ApiKey     string
 	SessionKey string
 }
 
-func NewBet(apiKey string) BettingFactory {
+// NewBet create pointer to Betting struct with base values
+func NewBet(apiKey string) *Betting {
 	return &Betting{
 		ApiKey: apiKey,
 	}
 }
 
+// Request function for send requests to betfair via JSON RPC
 func (b *Betting) Request(reqStruct interface{}, url BetURL, method string) error {
 	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
 	req.SetRequestURI(string(url))

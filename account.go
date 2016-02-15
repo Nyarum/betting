@@ -22,6 +22,7 @@ type DeveloperAppKeysResult struct {
 	Result  []DeveloperAppKey
 }
 
+// GetAppKeys for getting all developer keys from account
 func (b *Betting) GetAppKeys() (developAppKeys []DeveloperAppKey, err error) {
 	developAppKeysResult := &DeveloperAppKeysResult{}
 	err = b.Request(developAppKeysResult, AccountURL, "AccountAPING/v1.0/getDeveloperAppKeys")
@@ -51,6 +52,7 @@ type AccountDetailsResult struct {
 	Result  AccountDetails
 }
 
+// GetAccountDetails like get account details :)
 func (b *Betting) GetAccountDetails() (accountDetails *AccountDetails, err error) {
 	accountDetailsResult := &AccountDetailsResult{}
 	err = b.Request(accountDetailsResult, AccountURL, "AccountAPING/v1.0/getAccountDetails")
@@ -77,6 +79,7 @@ type AccountFundsResult struct {
 	Result  AccountFunds
 }
 
+// GetAccountFunds for getting balances of account
 func (b *Betting) GetAccountFunds() (accountFunds *AccountFunds, err error) {
 	accountFundsResult := &AccountFundsResult{}
 	err = b.Request(accountFundsResult, AccountURL, "AccountAPING/v1.0/getAccountFunds")
