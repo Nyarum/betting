@@ -11,9 +11,10 @@ import (
 type BetURL string
 
 const (
-	CertURL           = "https://identitysso-api.betfair.com/api/certlogin"
-	AccountURL BetURL = "https://api.betfair.com/exchange/account/json-rpc/v1"
-	BettingURL BetURL = "https://api.betfair.com/exchange/betting/json-rpc/v1"
+	CertURL             = "https://identitysso-api.betfair.com/api/certlogin"
+	KeepAliveURL        = "https://identitysso.betfair.com/api/keepAlive"
+	AccountURL   BetURL = "https://api.betfair.com/exchange/account/rest/v1.0"
+	BettingURL   BetURL = "https://api.betfair.com/exchange/betting/rest/v1.0"
 )
 
 // Betting main struct of all method for working with betfair
@@ -29,21 +30,22 @@ func NewBet(apiKey string) *Betting {
 	}
 }
 
-// Request function for send requests to betfair via JSON RPC
+// Request function for send requests to betfair via REST JSON
 func (b *Betting) Request(reqStruct interface{}, url BetURL, method string) error {
 	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
-	req.SetRequestURI(string(url))
+
+	urlBuild := bytes.NewBuffer([]byte{})
+	urlBuild.WriteString(string(url))
+	urlBuild.WriteString("/")
+	urlBuild.WriteString(method)
+	urlBuild.WriteString("/")
+
+	req.SetRequestURI(urlBuild.String())
+	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("X-Application", b.ApiKey)
 	req.Header.Set("X-Authentication", b.SessionKey)
 	req.Header.SetMethod("POST")
-
-	bufferString := bytes.NewBuffer([]byte{})
-	bufferString.WriteString(`{"params":{"filter":{"eventTypeIds":[1]}},"jsonrpc":"2.0","method":"`)
-	bufferString.WriteString(method)
-	bufferString.WriteString(`","id":1}`)
-
-	req.SetBody(bufferString.Bytes())
 
 	err := fasthttp.Do(req, resp)
 	if err != nil {

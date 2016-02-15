@@ -17,20 +17,12 @@ type DeveloperAppKey struct {
 	AppVersions []DeveloperAppVersion
 }
 
-type DeveloperAppKeysResult struct {
-	Jsonrpc string
-	Result  []DeveloperAppKey
-}
-
 // GetAppKeys for getting all developer keys from account
 func (b *Betting) GetAppKeys() (developAppKeys []DeveloperAppKey, err error) {
-	developAppKeysResult := &DeveloperAppKeysResult{}
-	err = b.Request(developAppKeysResult, AccountURL, "AccountAPING/v1.0/getDeveloperAppKeys")
+	err = b.Request(&developAppKeys, AccountURL, "getDeveloperAppKeys")
 	if err != nil {
 		return
 	}
-
-	developAppKeys = developAppKeysResult.Result
 
 	return
 }
@@ -47,20 +39,12 @@ type AccountDetails struct {
 	CountryCode   string
 }
 
-type AccountDetailsResult struct {
-	Jsonrpc string
-	Result  AccountDetails
-}
-
 // GetAccountDetails like get account details :)
-func (b *Betting) GetAccountDetails() (accountDetails *AccountDetails, err error) {
-	accountDetailsResult := &AccountDetailsResult{}
-	err = b.Request(accountDetailsResult, AccountURL, "AccountAPING/v1.0/getAccountDetails")
+func (b *Betting) GetAccountDetails() (accountDetails AccountDetails, err error) {
+	err = b.Request(&accountDetails, AccountURL, "getAccountDetails")
 	if err != nil {
 		return
 	}
-
-	accountDetails = &accountDetailsResult.Result
 
 	return
 }
@@ -74,20 +58,12 @@ type AccountFunds struct {
 	PointsBalance         *int     `json:"omitempty"`
 }
 
-type AccountFundsResult struct {
-	Jsonrpc string
-	Result  AccountFunds
-}
-
 // GetAccountFunds for getting balances of account
-func (b *Betting) GetAccountFunds() (accountFunds *AccountFunds, err error) {
-	accountFundsResult := &AccountFundsResult{}
-	err = b.Request(accountFundsResult, AccountURL, "AccountAPING/v1.0/getAccountFunds")
+func (b *Betting) GetAccountFunds() (accountFunds AccountFunds, err error) {
+	err = b.Request(&accountFunds, AccountURL, "getAccountFunds")
 	if err != nil {
 		return
 	}
-
-	accountFunds = &accountFundsResult.Result
 
 	return
 }

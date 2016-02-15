@@ -48,20 +48,56 @@ func (b *Betting) GetSession(pemCert, keyCert, login, password string) error {
 		return err
 	}
 
-	if session != nil {
-		var loginStatus LoginStatus
-		err := loginStatus.Unmarshal(session.LoginStatus)
-		if err != nil {
-			return err
-		}
-
-		switch loginStatus {
-		case LS_SUCCESS:
-			b.SessionKey = session.SessionToken
-		default:
-			err = errors.New(loginStatus.String())
-		}
+	var loginStatus LoginStatus
+	err = loginStatus.Unmarshal(session.LoginStatus)
+	if err != nil {
+		return err
 	}
 
-	return nil
+	switch loginStatus {
+	case LS_SUCCESS:
+		b.SessionKey = session.SessionToken
+	default:
+		err = errors.New(loginStatus.String())
+	}
+
+	return err
+}
+
+type KeepAlive struct {
+	Token   string
+	Product string
+	Status  string
+	Error   string
+}
+
+// KeepAlive for support connect, session key will available for 20 minutes
+func (b *Betting) KeepAlive() error {
+	var keepAlive *KeepAlive = &KeepAlive{}
+
+	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
+	req.SetRequestURI(KeepAliveURL)
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("X-Application", b.ApiKey)
+	req.Header.Set("X-Authentication", b.SessionKey)
+	req.Header.SetMethod("POST")
+
+	err := fasthttp.Do(req, resp)
+	if err != nil {
+		return err
+	}
+
+	err = json.Unmarshal(resp.Body(), keepAlive)
+	if err != nil {
+		return err
+	}
+
+	switch keepAlive.Status {
+	case "SUCCESS":
+		b.SessionKey = keepAlive.Token
+	default:
+		err = errors.New(keepAlive.Error)
+	}
+
+	return err
 }

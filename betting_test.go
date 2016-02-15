@@ -33,10 +33,18 @@ func loadConfig() (test Test) {
 func TestRequestLogin(t *testing.T) {
 	config := loadConfig()
 
-	err := NewBet(config.ApiKey).GetSession(config.CertPem, config.CertKey, config.Login, config.Password)
+	bet := NewBet(config.ApiKey)
+
+	err := bet.GetSession(config.CertPem, config.CertKey, config.Login, config.Password)
 	if err != nil {
 		t.Error(err)
 	}
+
+	err = bet.KeepAlive()
+	if err != nil {
+		t.Error(err)
+	}
+
 }
 
 func TestRequestAppKeys(t *testing.T) {
