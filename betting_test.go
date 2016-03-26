@@ -17,7 +17,7 @@ type Test struct {
 }
 
 func loadConfig() (test Test) {
-	loadFile, err := ioutil.ReadFile("test.json")
+	loadFile, err := ioutil.ReadFile("testdata/test.json")
 	if err != nil {
 		log.Fatalln(err)
 	}
