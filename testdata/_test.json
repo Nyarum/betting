@@ -4,5 +4,5 @@
 	"password": "string",
 	"cert_pem": "path",
 	"cert_key": "path",
-	"debug": "bool"
+	"debug": false
 }
