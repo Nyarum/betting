@@ -39,6 +39,6 @@ func (code *BetStatus) UnmarshalJSON(buf []byte) error {
 	} else {
 		err = ErrUnknownBetStatus
 	}
-	return err
 
+	return err
 }

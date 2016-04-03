@@ -43,14 +43,13 @@ func (code MarketProjection) String() string {
 	return marketProjectionItems[code]
 }
 
-func (code *MarketProjection) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := marketProjectionMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownMarketProjection
+func (code *MarketProjection) Check(enum string) error {
+	val, ok := marketProjectionMap[enum]
+	if !ok {
+		return ErrUnknownMarketProjection
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

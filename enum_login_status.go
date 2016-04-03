@@ -126,7 +126,7 @@ func (code LoginStatus) String() string {
 	return lsItems[code]
 }
 
-func (code *LoginStatus) Unmarshal(enum string) error {
+func (code *LoginStatus) Check(enum string) error {
 	val, ok := lsMap[enum]
 	if !ok {
 		return ErrUnknownLoginStatus

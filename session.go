@@ -49,7 +49,7 @@ func (b *Betting) GetSession(pemCert, keyCert, login, password string) error {
 	}
 
 	var loginStatus LoginStatus
-	err = loginStatus.Unmarshal(session.LoginStatus)
+	err = loginStatus.Check(session.LoginStatus)
 	if err != nil {
 		return err
 	}
