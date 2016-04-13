@@ -10,6 +10,7 @@
 ### Features
 - Get Session
 - Get Developer Keys
+- Create Developer Keys
 - Get Account Details
 - Get Account Funds
 - Keep Alive (Session key available for 20 minutes and after you need use this function)
@@ -21,6 +22,7 @@
 
 ### Wrapper based on
 - fasthttp
+- ffjson
 
 ### Examples
 ```
