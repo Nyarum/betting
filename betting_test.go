@@ -97,7 +97,7 @@ func TestRequestAccountFunds(t *testing.T) {
 		t.Error(err)
 	}
 
-	funds, err := bet.GetAccountFunds()
+	funds, err := bet.GetAccountFunds(Filter{Wallet: UK})
 	if err != nil {
 		t.Error(err)
 	}

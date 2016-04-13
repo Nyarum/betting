@@ -17,9 +17,19 @@ type DeveloperAppKey struct {
 	AppVersions []DeveloperAppVersion
 }
 
+// CreateAppKeys for create new developer app keys in account
+func (b *Betting) CreateAppKeys() (developAppKeys []DeveloperAppKey, err error) {
+	err = b.Request(&developAppKeys, AccountURL, "createDeveloperAppKeys", nil)
+	if err != nil {
+		return
+	}
+
+	return
+}
+
 // GetAppKeys for getting all developer keys from account
 func (b *Betting) GetAppKeys() (developAppKeys []DeveloperAppKey, err error) {
-	err = b.Request(&developAppKeys, AccountURL, "getDeveloperAppKeys")
+	err = b.Request(&developAppKeys, AccountURL, "getDeveloperAppKeys", nil)
 	if err != nil {
 		return
 	}
@@ -41,7 +51,7 @@ type AccountDetails struct {
 
 // GetAccountDetails like get account details :)
 func (b *Betting) GetAccountDetails() (accountDetails AccountDetails, err error) {
-	err = b.Request(&accountDetails, AccountURL, "getAccountDetails")
+	err = b.Request(&accountDetails, AccountURL, "getAccountDetails", nil)
 	if err != nil {
 		return
 	}
@@ -59,8 +69,8 @@ type AccountFunds struct {
 }
 
 // GetAccountFunds for getting balances of account
-func (b *Betting) GetAccountFunds() (accountFunds AccountFunds, err error) {
-	err = b.Request(&accountFunds, AccountURL, "getAccountFunds")
+func (b *Betting) GetAccountFunds(filter Filter) (accountFunds AccountFunds, err error) {
+	err = b.Request(&accountFunds, AccountURL, "getAccountFunds", &filter)
 	if err != nil {
 		return
 	}

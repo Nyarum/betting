@@ -2,8 +2,8 @@ package betting
 
 import (
 	"bytes"
-	"encoding/json"
 
+	"github.com/pquerna/ffjson/ffjson"
 	"github.com/valyala/fasthttp"
 )
 
@@ -31,7 +31,7 @@ func NewBet(apiKey string) *Betting {
 }
 
 // Request function for send requests to betfair via REST JSON
-func (b *Betting) Request(reqStruct interface{}, url BetURL, method string) error {
+func (b *Betting) Request(reqStruct interface{}, url BetURL, method string, filter *Filter) error {
 	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
 
 	urlBuild := bytes.NewBuffer([]byte{})
@@ -47,12 +47,21 @@ func (b *Betting) Request(reqStruct interface{}, url BetURL, method string) erro
 	req.Header.Set("X-Authentication", b.SessionKey)
 	req.Header.SetMethod("POST")
 
+	if filter != nil {
+		filterBody, err := ffjson.Marshal(&filter)
+		if err != nil {
+			return err
+		}
+
+		req.SetBody(filterBody)
+	}
+
 	err := fasthttp.Do(req, resp)
 	if err != nil {
 		return err
 	}
 
-	err = json.Unmarshal(resp.Body(), reqStruct)
+	err = ffjson.Unmarshal(resp.Body(), reqStruct)
 	if err != nil {
 		return err
 	}
