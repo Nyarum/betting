@@ -35,14 +35,13 @@ func (pd PriceData) String() string {
 	return priceDataItems[pd]
 }
 
-func (code *PriceData) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := priceDataMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownPriceData
+func (code *PriceData) Check(enum string) error {
+	val, ok := priceDataMap[enum]
+	if !ok {
+		return ErrUnknownPriceData
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

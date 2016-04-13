@@ -116,13 +116,13 @@ func (code InstructionReportErrorCode) String() string {
 	return irecItems[code]
 }
 
-func (code *InstructionReportErrorCode) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := irecMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownInstructionReportErrorCode
+func (code *InstructionReportErrorCode) Check(enum string) error {
+	val, ok := irecMap[enum]
+	if !ok {
+		return ErrUnknownInstructionReportErrorCode
 	}
-	return err
+
+	*code = val
+
+	return nil
 }

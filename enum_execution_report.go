@@ -117,14 +117,13 @@ func (code ExecutionReportStatus) String() string {
 	return ersItems[code]
 }
 
-func (code *ExecutionReportStatus) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := ersMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownExecutionReportStatus
+func (code *ExecutionReportStatus) Check(enum string) error {
+	val, ok := ersMap[enum]
+	if !ok {
+		return ErrUnknownExecutionReportStatus
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

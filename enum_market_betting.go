@@ -42,14 +42,13 @@ func (code MarketBettingType) String() string {
 	return marketBettingTypeItems[code]
 }
 
-func (code *MarketBettingType) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := marketBettingTypeMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownMarketBettingType
+func (code *MarketBettingType) Check(enum string) error {
+	val, ok := marketBettingTypeMap[enum]
+	if !ok {
+		return ErrUnknownMarketBettingType
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

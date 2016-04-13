@@ -30,14 +30,13 @@ func (code TimeGranularity) String() string {
 	return timeGranularityItems[code]
 }
 
-func (code *TimeGranularity) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := timeGranularityMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownTimeGranularity
+func (code *TimeGranularity) Check(enum string) error {
+	val, ok := timeGranularityMap[enum]
+	if !ok {
+		return ErrUnknownTimeGranularity
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

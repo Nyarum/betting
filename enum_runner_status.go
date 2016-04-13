@@ -43,14 +43,13 @@ func (ms RunnerStatus) String() string {
 	return runnerStatusItems[ms]
 }
 
-func (code *RunnerStatus) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := runnerStatusMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownRunnerStatus
+func (code *RunnerStatus) Check(enum string) error {
+	val, ok := runnerStatusMap[enum]
+	if !ok {
+		return ErrUnknownRunnerStatus
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

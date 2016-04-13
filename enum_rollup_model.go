@@ -31,14 +31,13 @@ func (code RollupModel) String() string {
 	return rollupModelItems[code]
 }
 
-func (code *RollupModel) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := rollupModelMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownRollupModel
+func (code *RollupModel) Check(enum string) error {
+	val, ok := rollupModelMap[enum]
+	if !ok {
+		return ErrUnknownRollupModel
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

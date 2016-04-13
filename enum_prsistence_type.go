@@ -28,14 +28,13 @@ func (code PersistenceType) String() string {
 	return persistenceTypeItems[code]
 }
 
-func (code *PersistenceType) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := persistenceTypeMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownPersistenceType
+func (code *PersistenceType) Check(enum string) error {
+	val, ok := persistenceTypeMap[enum]
+	if !ok {
+		return ErrUnknownPersistenceType
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

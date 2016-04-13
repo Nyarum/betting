@@ -31,14 +31,13 @@ func (code OrderType) String() string {
 	return orderTypeItems[code]
 }
 
-func (code *OrderType) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := orderTypeMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownOrderType
+func (code *OrderType) Check(enum string) error {
+	val, ok := orderTypeMap[enum]
+	if !ok {
+		return ErrUnknownOrderType
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

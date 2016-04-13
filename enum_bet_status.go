@@ -31,14 +31,13 @@ func (code BetStatus) String() string {
 	return betStatusItems[code]
 }
 
-func (code *BetStatus) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := betStatusMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownBetStatus
+func (code *BetStatus) Check(enum string) error {
+	val, ok := betStatusMap[enum]
+	if !ok {
+		return ErrUnknownBetStatus
 	}
 
-	return err
+	*code = val
+
+	return nil
 }

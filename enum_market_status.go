@@ -31,14 +31,13 @@ func (ms MarketStatus) String() string {
 	return marketStatusItems[ms]
 }
 
-func (code *MarketStatus) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := marketStatusMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknowMarketStatus
+func (code *MarketStatus) Check(enum string) error {
+	val, ok := marketStatusMap[enum]
+	if !ok {
+		return ErrUnknowMarketStatus
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

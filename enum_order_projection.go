@@ -28,14 +28,13 @@ func (op OrderProjection) String() string {
 	return orderProjectionItems[op]
 }
 
-func (code *OrderProjection) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := orderProjectionMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownOrderProjection
+func (code *OrderProjection) Check(enum string) error {
+	val, ok := orderProjectionMap[enum]
+	if !ok {
+		return ErrUnknownOrderProjection
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

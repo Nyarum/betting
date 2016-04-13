@@ -37,14 +37,13 @@ func (code MarketSort) String() string {
 	return marketSortItems[code]
 }
 
-func (code *MarketSort) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := marketSortMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownMarketSort
+func (code *MarketSort) Check(enum string) error {
+	val, ok := marketSortMap[enum]
+	if !ok {
+		return ErrUnknownMarketSort
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

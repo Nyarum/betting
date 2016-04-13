@@ -28,14 +28,13 @@ func (mp MatchProjection) String() string {
 	return matchProjectionItems[mp]
 }
 
-func (code *MatchProjection) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := matchProjectionMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownMatchProjection
+func (code *MatchProjection) Check(enum string) error {
+	val, ok := matchProjectionMap[enum]
+	if !ok {
+		return ErrUnknownMatchProjection
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

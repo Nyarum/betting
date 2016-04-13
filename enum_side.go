@@ -21,19 +21,22 @@ var sideItems = [...]string{
 	"LAY",
 }
 
+var sideMap = map[string]Side{
+	runnerStatusItems[BACK]: BACK,
+	runnerStatusItems[LAY]:  LAY,
+}
+
 func (code Side) String() string {
 	return sideItems[code]
 }
 
-func (side *Side) UnmarshalJSON(buf []byte) error {
-	var err error
-	switch {
-	case string(buf) == sideItems[BACK]:
-		*side = BACK
-	case string(buf) == sideItems[LAY]:
-		*side = LAY
-	default:
-		err = ErrUnknownSide
+func (code *Side) Check(enum string) error {
+	val, ok := sideMap[enum]
+	if !ok {
+		return ErrUnknownSide
 	}
-	return err
+
+	*code = val
+
+	return nil
 }

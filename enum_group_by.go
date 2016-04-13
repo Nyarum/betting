@@ -34,14 +34,13 @@ func (code GroupBy) String() string {
 	return groupByItems[code]
 }
 
-func (code *GroupBy) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := groupByMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownGroupBy
+func (code *GroupBy) Check(enum string) error {
+	val, ok := groupByMap[enum]
+	if !ok {
+		return ErrUnknownGroupBy
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

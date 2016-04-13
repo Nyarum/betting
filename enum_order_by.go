@@ -37,14 +37,13 @@ func (code OrderBy) String() string {
 	return orderByItems[code]
 }
 
-func (code *OrderBy) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := orderByMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownOrderBy
+func (code *OrderBy) Check(enum string) error {
+	val, ok := orderByMap[enum]
+	if !ok {
+		return ErrUnknownOrderBy
 	}
-	return err
 
+	*code = val
+
+	return nil
 }

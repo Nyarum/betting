@@ -56,13 +56,13 @@ func (code ExceptionErrorCode) String() string {
 	return eecItems[code]
 }
 
-func (code *ExceptionErrorCode) UnmarshalJSON(buf []byte) error {
-	var err error
-	val, ok := eecMap[string(buf)]
-	if ok {
-		*code = val
-	} else {
-		err = ErrUnknownExceptionCode
+func (code *ExceptionErrorCode) Check(enum string) error {
+	val, ok := eecMap[enum]
+	if !ok {
+		return ErrUnknownExceptionCode
 	}
-	return err
+
+	*code = val
+
+	return nil
 }
