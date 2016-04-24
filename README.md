@@ -8,11 +8,7 @@
 - It is working!
 
 ### Features
-- Get Session
-- Get Developer Keys
-- Create Developer Keys
-- Get Account Details
-- Get Account Funds
+- Full Account API
 - Keep Alive (Session key available for 20 minutes and after you need use this function)
 - Enums ([Details](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums))
 
