@@ -8,14 +8,15 @@ type DataRange struct {
 }
 
 type Filter struct {
-	Wallet        Wallet      `json:"wallet,omitempty"`
-	Locale        string      `json:"wallet,omitempty"`
-	FromRecord    int         `json:"fromRecord,omitempty"`
-	RecordCount   int         `json:"recordCount,omitempty"`
-	ItemDataRange DataRange   `json:"itemDateRange,omitempty"`
-	IncludeItem   IncludeItem `json:"recordCount,omitempty"`
-	FromCurrency  string      `json:"fromCurrency,omitempty"`
-	From          Wallet      `json:"from,omitempty"`
-	To            Wallet      `json:"to,omitempty"`
-	Amount        float64     `json:"amount,omitempty"`
+	Wallet        Wallet       `json:"wallet,omitempty"`
+	Locale        string       `json:"locale,omitempty"`
+	FromRecord    int          `json:"fromRecord,omitempty"`
+	RecordCount   int          `json:"recordCount,omitempty"`
+	ItemDataRange DataRange    `json:"itemDateRange,omitempty"`
+	IncludeItem   IncludeItem  `json:"recordCount,omitempty"`
+	FromCurrency  string       `json:"fromCurrency,omitempty"`
+	From          Wallet       `json:"from,omitempty"`
+	To            Wallet       `json:"to,omitempty"`
+	Amount        float64      `json:"amount,omitempty"`
+	MarketFilter  MarketFilter `json:"filter,omitempty"`
 }
