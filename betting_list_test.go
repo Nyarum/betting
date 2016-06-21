@@ -143,3 +143,27 @@ func TestRequestListEventTypes(t *testing.T) {
 		log.Printf("TestRequestListEventTypes\n %v \n\n", list)
 	}
 }
+
+func TestRequestListMarketCatalogue(t *testing.T) {
+	config := loadConfig()
+
+	bet := NewBet(config.ApiKey)
+
+	err := bet.GetSession(config.CertPem, config.CertKey, config.Login, config.Password)
+	if err != nil {
+		t.Error(err)
+	}
+
+	list, err := bet.ListMarketCatalogue(Filter{
+		Locale:       "en",
+		MarketFilter: MarketFilter{},
+		MaxResults:   5,
+	})
+	if err != nil {
+		t.Error(err)
+	}
+
+	if config.Debug {
+		log.Printf("TestRequestListMarketCatalogue\n %v \n\n", list)
+	}
+}

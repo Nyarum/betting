@@ -175,3 +175,52 @@ func (b *Betting) ListEventTypes(filter Filter) (eventTypeResult []EventTypeResu
 
 	return
 }
+
+type MarketCatalogue struct {
+	MarketID        string            `json:"marketId,omitempty"`
+	MarketName      string            `json:"marketName,omitempty"`
+	MarketStartTime time.Time         `json:"marketStartTime,omitempty"`
+	Description     MarketDescription `json:"description,omitempty"`
+	TotalMatched    float64           `json:"totalMatched,omitempty"`
+	Runners         []RunnerCatalog   `json:"runners,omitempty"`
+	EventType       EventType         `json:"eventType,omitempty"`
+	Competition     Competition       `json:"competition,omitempty"`
+	Event           Event             `json:"event,omitempty"`
+}
+
+type MarketDescription struct {
+	PersistenceEnabled bool              `json:"persistenceEnabled,omitempty"`
+	BspMarket          bool              `json:"bspMarket,omitempty"`
+	MarketTime         time.Time         `json:"marketTime,omitempty"`
+	SuspendTime        time.Time         `json:"suspendTime,omitempty"`
+	SettleTime         time.Time         `json:"settleTime,omitempty"`
+	BettingType        MarketBettingType `json:"bettingType,omitempty"`
+	TurnInPlayEnabled  bool              `json:"turnInPlayEnabled,omitempty"`
+	MarketType         string            `json:"marketType,omitempty"`
+	Regulator          string            `json:"marketId,omitempty"`
+	MarketBaseRate     float64           `json:"marketBaseRate,omitempty"`
+	DiscountAllowed    bool              `json:"discountAllowed,omitempty"`
+	Wallet             string            `json:"wallet,omitempty"`
+	Rules              string            `json:"rules,omitempty"`
+	RulesHasDate       bool              `json:"rulesHasDate,omitempty"`
+	EachWayDivisor     float64           `json:"eachWayDivisor,omitempty"`
+	Clarifications     string            `json:"clarifications,omitempty"`
+}
+
+type RunnerCatalog struct {
+	SelectionID  int64             `json:"selectionId,omitempty"`
+	RunnerName   string            `json:"runnerName,omitempty"`
+	Handicap     float64           `json:"handicap,omitempty"`
+	SortPriority int               `json:"sortPriority,omitempty"`
+	Metadata     map[string]string `json:"metadata,omitempty"`
+}
+
+// ListMarketCatalogue to get a list of information about published (ACTIVE/SUSPENDED) markets that does not change (or changes very rarely).
+func (b *Betting) ListMarketCatalogue(filter Filter) (marketCatalogue []MarketCatalogue, err error) {
+	err = b.Request(&marketCatalogue, BettingURL, "listMarketCatalogue", &filter)
+	if err != nil {
+		return
+	}
+
+	return
+}

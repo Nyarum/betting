@@ -39,4 +39,5 @@ type Filter struct {
 	SettledDateRange       DateRange       `json:"settledDateRange,omitempty"`
 	GroupBy                GroupBy         `json:"groupBy,omitempty"`
 	IncludeItemDescription bool            `json:"includeItemDescription,omitempty"`
+	MaxResults             int             `json:"maxResults,omitempty"`
 }
