@@ -224,3 +224,26 @@ func (b *Betting) ListMarketCatalogue(filter Filter) (marketCatalogue []MarketCa
 
 	return
 }
+
+type MarketProfitAndLoss struct {
+	MarketId          string                `json:"marketId,omitempty"`
+	CommissionApplied float64               `json:"commissionApplied,omitempty"`
+	ProfitAndLosses   []RunnerProfitAndLoss `json:"profitAndLosses,omitempty"`
+}
+
+type RunnerProfitAndLoss struct {
+	SelectionId string  `json:"selectionId,omitempty"`
+	IfWin       float64 `json:"ifWin,omitempty"`
+	IfLose      float64 `json:"ifLose,omitempty"`
+	IfPlace     float64 `json:"ifPlace,omitempty"`
+}
+
+// ListMarketProfitAndLoss Retrieve profit and loss for a given list of OPEN markets.
+func (b *Betting) ListMarketProfitAndLoss(filter Filter) (marketProfitAndLoss []MarketProfitAndLoss, err error) {
+	err = b.Request(&marketProfitAndLoss, BettingURL, "listMarketProfitAndLoss", &filter)
+	if err != nil {
+		return
+	}
+
+	return
+}

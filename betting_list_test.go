@@ -167,3 +167,25 @@ func TestRequestListMarketCatalogue(t *testing.T) {
 		log.Printf("TestRequestListMarketCatalogue\n %v \n\n", list)
 	}
 }
+
+func TestRequestListMarketProfitAndLoss(t *testing.T) {
+	config := loadConfig()
+
+	bet := NewBet(config.ApiKey)
+
+	err := bet.GetSession(config.CertPem, config.CertKey, config.Login, config.Password)
+	if err != nil {
+		t.Error(err)
+	}
+
+	list, err := bet.ListMarketProfitAndLoss(Filter{
+		MarketProfitAndLossMarketIds: []string{"1.22272098"},
+	})
+	if err != nil {
+		t.Error(err)
+	}
+
+	if config.Debug {
+		log.Printf("TestRequestListMarketProfitAndLoss\n %v \n\n", list)
+	}
+}
