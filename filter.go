@@ -42,4 +42,5 @@ type Filter struct {
 	MaxResults                   int             `json:"maxResults,omitempty"`
 	IncludeSettledBets           bool            `json:"includeSettledBets,omitempty"`
 	MarketProfitAndLossMarketIds []string        `json:"marketIds,omitempty"`
+	TimeGranularity              TimeGranularity `json:"granularity,omitempty"`
 }

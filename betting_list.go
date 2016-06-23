@@ -262,3 +262,23 @@ func (b *Betting) ListMarketTypes(filter Filter) (marketTypeResult []MarketTypeR
 
 	return
 }
+
+type TimeRangeResult struct {
+	TimeRange   TimeRange `json:"timeRange,omitempty"`
+	MarketCount int       `json:"marketCount,omitempty"`
+}
+
+type TimeRange struct {
+	From time.Time `json:"from,omitempty"`
+	To   time.Time `json:"to,omitempty"`
+}
+
+// ListTimeRangeResult to get  a list of time ranges in the granularity specified in the request (i.e. 3PM to 4PM, Aug 14th to Aug 15th) associated with the markets selected by the MarketFilter.
+func (b *Betting) ListTimeRangeResult(filter Filter) (timeRangeResult []TimeRangeResult, err error) {
+	err = b.Request(&timeRangeResult, BettingURL, "listTimeRanges", &filter)
+	if err != nil {
+		return
+	}
+
+	return
+}

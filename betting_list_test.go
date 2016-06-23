@@ -212,3 +212,26 @@ func TestRequestListMarketTypes(t *testing.T) {
 		log.Printf("TestRequestListMarketTypes\n %v \n\n", list)
 	}
 }
+
+func TestRequestListTimeRangeResult(t *testing.T) {
+	config := loadConfig()
+
+	bet := NewBet(config.ApiKey)
+
+	err := bet.GetSession(config.CertPem, config.CertKey, config.Login, config.Password)
+	if err != nil {
+		t.Error(err)
+	}
+
+	list, err := bet.ListTimeRangeResult(Filter{
+		MarketFilter:    MarketFilter{},
+		TimeGranularity: TG_DAYS,
+	})
+	if err != nil {
+		t.Error(err)
+	}
+
+	if config.Debug {
+		log.Printf("TestRequestListTimeRangeResult\n %v \n\n", list)
+	}
+}
