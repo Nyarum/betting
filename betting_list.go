@@ -247,3 +247,18 @@ func (b *Betting) ListMarketProfitAndLoss(filter Filter) (marketProfitAndLoss []
 
 	return
 }
+
+type MarketTypeResult struct {
+	MarketType  string `json:"marketType,omitempty"`
+	MarketCount int    `json:"marketCount,omitempty"`
+}
+
+// ListMarketTypes to get a list of market types (i.e. MATCH_ODDS, NEXT_GOAL) associated with the markets selected by the MarketFilter.
+func (b *Betting) ListMarketTypes(filter Filter) (marketTypeResult []MarketTypeResult, err error) {
+	err = b.Request(&marketTypeResult, BettingURL, "listMarketTypes", &filter)
+	if err != nil {
+		return
+	}
+
+	return
+}
