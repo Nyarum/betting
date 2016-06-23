@@ -18,7 +18,7 @@ func TestRequestListCompetitions(t *testing.T) {
 
 	list, err := bet.ListCompetitions(Filter{
 		Locale:       "en",
-		MarketFilter: MarketFilter{
+		MarketFilter: &MarketFilter{
 		//InPlayOnly: false,
 		},
 	})
@@ -43,7 +43,7 @@ func TestRequestListCountries(t *testing.T) {
 
 	list, err := bet.ListCountries(Filter{
 		Locale:       "en",
-		MarketFilter: MarketFilter{
+		MarketFilter: &MarketFilter{
 		//InPlayOnly: false,
 		},
 	})
@@ -87,7 +87,7 @@ func TestRequestListClearedOrders(t *testing.T) {
 	}
 
 	list, err := bet.ListClearedOrders(Filter{
-		SettledDateRange: DateRange{time.Now().AddDate(-1, 0, 0), time.Now()},
+		SettledDateRange: &DateRange{time.Now().AddDate(-1, 0, 0), time.Now()},
 	})
 	if err != nil {
 		t.Error(err)
@@ -110,7 +110,7 @@ func TestRequestListEvents(t *testing.T) {
 
 	list, err := bet.ListEvents(Filter{
 		Locale:       "en",
-		MarketFilter: MarketFilter{},
+		MarketFilter: &MarketFilter{},
 	})
 	if err != nil {
 		t.Error(err)
@@ -133,7 +133,7 @@ func TestRequestListEventTypes(t *testing.T) {
 
 	list, err := bet.ListEventTypes(Filter{
 		Locale:       "en",
-		MarketFilter: MarketFilter{},
+		MarketFilter: &MarketFilter{},
 	})
 	if err != nil {
 		t.Error(err)
@@ -156,7 +156,7 @@ func TestRequestListMarketCatalogue(t *testing.T) {
 
 	list, err := bet.ListMarketCatalogue(Filter{
 		Locale:       "en",
-		MarketFilter: MarketFilter{},
+		MarketFilter: &MarketFilter{},
 		MaxResults:   5,
 	})
 	if err != nil {
@@ -201,7 +201,7 @@ func TestRequestListMarketTypes(t *testing.T) {
 	}
 
 	list, err := bet.ListMarketTypes(Filter{
-		MarketFilter: MarketFilter{MarketIDs: []string{"1.22272098"}},
+		MarketFilter: &MarketFilter{MarketIDs: []string{"1.22272098"}},
 		Locale:       "en",
 	})
 	if err != nil {
@@ -224,7 +224,7 @@ func TestRequestListTimeRangeResult(t *testing.T) {
 	}
 
 	list, err := bet.ListTimeRangeResult(Filter{
-		MarketFilter:    MarketFilter{},
+		MarketFilter:    &MarketFilter{MarketIDs: []string{"1"}},
 		TimeGranularity: TG_DAYS,
 	})
 	if err != nil {

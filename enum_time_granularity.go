@@ -2,6 +2,8 @@ package betting
 
 import (
 	"errors"
+
+	"github.com/pquerna/ffjson/ffjson"
 )
 
 var ErrUnknownTimeGranularity = errors.New("Unknown timeGranularity value")
@@ -28,6 +30,10 @@ var timeGranularityMap = map[string]TimeGranularity{
 
 func (code TimeGranularity) String() string {
 	return timeGranularityItems[code]
+}
+
+func (code TimeGranularity) MarshalJSON() ([]byte, error) {
+	return ffjson.Marshal(code.String())
 }
 
 func (code *TimeGranularity) Check(enum string) error {

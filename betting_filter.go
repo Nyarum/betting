@@ -14,6 +14,6 @@ type MarketFilter struct {
 	MarketBettingTypes []MarketBettingType `json:"marketBettingTypes,omitempty"`
 	MarketCountries    []string            `json:"marketCountries,omitempty"`
 	MarketTypeCodes    []string            `json:"marketTypeCodes,omitempty"`
-	MarketStartTime    DateRange           `json:"marketStartTime,omitempty"`
+	MarketStartTime    *DateRange          `json:"marketStartTime,omitempty"`
 	WithOrders         []OrderStatus       `json:"withOrders,omitempty"`
 }
