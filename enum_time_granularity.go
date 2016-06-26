@@ -1,48 +1,20 @@
 package betting
 
-import (
-	"errors"
+import "errors"
 
-	"github.com/pquerna/ffjson/ffjson"
-)
-
-var ErrUnknownTimeGranularity = errors.New("Unknown timeGranularity value")
-
-type TimeGranularity int
-
-const (
-	TG_DAYS TimeGranularity = iota
-	TG_HOURS
-	TG_MINUTES
-)
-
-var timeGranularityItems = [...]string{
-	"DAYS",
-	"HOURS",
-	"MINUTES",
-}
-
-var timeGranularityMap = map[string]TimeGranularity{
-	timeGranularityItems[TG_DAYS]:    TG_DAYS,
-	timeGranularityItems[TG_HOURS]:   TG_HOURS,
-	timeGranularityItems[TG_MINUTES]: TG_MINUTES,
-}
-
-func (code TimeGranularity) String() string {
-	return timeGranularityItems[code]
-}
-
-func (code TimeGranularity) MarshalJSON() ([]byte, error) {
-	return ffjson.Marshal(code.String())
-}
-
-func (code *TimeGranularity) Check(enum string) error {
-	val, ok := timeGranularityMap[enum]
-	if !ok {
-		return ErrUnknownTimeGranularity
+var (
+	ETimeGranularity = eTimeGranularity{
+		TG_DAYS:    "DAYS",
+		TG_HOURS:   "HOURS",
+		TG_MINUTES: "MINUTES",
 	}
+	ErrUnknownTimeGranularity = errors.New("Unknown timeGranularity value")
+)
 
-	*code = val
-
-	return nil
+type eTimeGranularity struct {
+	TG_DAYS    eTimeGranularityInternal
+	TG_HOURS   eTimeGranularityInternal
+	TG_MINUTES eTimeGranularityInternal
 }
+
+type eTimeGranularityInternal string

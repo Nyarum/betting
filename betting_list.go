@@ -44,26 +44,26 @@ type PriceSize struct {
 }
 
 type CurrentOrderSummary struct {
-	BetID               string          `json:"betId"`
-	MarketID            string          `json:"marketId"`
-	SelectionID         int64           `json:"selectionId"`
-	Handicap            float64         `json:"handicap"`
-	PriceSize           PriceSize       `json:"priceSize"`
-	BspLiability        float64         `json:"bspLiability"`
-	Side                Side            `json:"side"`
-	Status              OrderStatus     `json:"status"`
-	PersistenceType     PersistenceType `json:"persistenceType"`
-	OrderType           OrderType       `json:"orderType"`
-	PlacedDate          time.Time       `json:"placedDate"`
-	MatchedDate         time.Time       `json:"matchedDate"`
-	AveragePriceMatched float64         `json:"averagePriceMatched,omitempty"`
-	SizeMatched         float64         `json:"sizeMatched,omitempty"`
-	SizeRemaining       float64         `json:"sizeRemaining,omitempty"`
-	SizeLapsed          float64         `json:"sizeLapsed,omitempty"`
-	SizeCancelled       float64         `json:"sizeCancelled,omitempty"`
-	SizeVoided          float64         `json:"sizeVoided,omitempty"`
-	RegulatorAuthCode   string          `json:"regulatorAuthCode,omitempty"`
-	RegulatorCode       string          `json:"regulatorCode,omitempty"`
+	BetID               string               `json:"betId"`
+	MarketID            string               `json:"marketId"`
+	SelectionID         int64                `json:"selectionId"`
+	Handicap            float64              `json:"handicap"`
+	PriceSize           PriceSize            `json:"priceSize"`
+	BspLiability        float64              `json:"bspLiability"`
+	Side                eSideInternal        `json:"side"`
+	Status              eOrderStatusInternal `json:"status"`
+	PersistenceType     PersistenceType      `json:"persistenceType"`
+	OrderType           OrderType            `json:"orderType"`
+	PlacedDate          time.Time            `json:"placedDate"`
+	MatchedDate         time.Time            `json:"matchedDate"`
+	AveragePriceMatched float64              `json:"averagePriceMatched,omitempty"`
+	SizeMatched         float64              `json:"sizeMatched,omitempty"`
+	SizeRemaining       float64              `json:"sizeRemaining,omitempty"`
+	SizeLapsed          float64              `json:"sizeLapsed,omitempty"`
+	SizeCancelled       float64              `json:"sizeCancelled,omitempty"`
+	SizeVoided          float64              `json:"sizeVoided,omitempty"`
+	RegulatorAuthCode   string               `json:"regulatorAuthCode,omitempty"`
+	RegulatorCode       string               `json:"regulatorCode,omitempty"`
 }
 
 type CurrentOrderSummaryReport struct {
@@ -102,7 +102,7 @@ type ClearedOrderSummary struct {
 	PlacedDate      time.Time       `json:"placedDate,omitempty"`
 	PersistenceType PersistenceType `json:"persistenceType,omitempty"`
 	OrderType       OrderType       `json:"orderType,omitempty"`
-	Side            Side            `json:"side,omitempty"`
+	Side            eSideInternal   `json:"side,omitempty"`
 	ItemDescription ItemDescription `json:"itemDescription,omitempty"`
 	BetOutcome      string          `json:"betOutcome,omitempty"`
 	PriceRequested  float64         `json:"priceRequested,omitempty"`

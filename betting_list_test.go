@@ -88,6 +88,7 @@ func TestRequestListClearedOrders(t *testing.T) {
 
 	list, err := bet.ListClearedOrders(Filter{
 		SettledDateRange: &DateRange{time.Now().AddDate(-1, 0, 0), time.Now()},
+		BetStatus:        EBetStatus.BS_SETTLED,
 	})
 	if err != nil {
 		t.Error(err)
@@ -225,7 +226,7 @@ func TestRequestListTimeRangeResult(t *testing.T) {
 
 	list, err := bet.ListTimeRangeResult(Filter{
 		MarketFilter:    &MarketFilter{MarketIDs: []string{"1"}},
-		TimeGranularity: TG_DAYS,
+		TimeGranularity: ETimeGranularity.TG_DAYS,
 	})
 	if err != nil {
 		t.Error(err)

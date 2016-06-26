@@ -2,6 +2,7 @@ package betting
 
 import (
 	"bytes"
+	"fmt"
 
 	"github.com/pquerna/ffjson/ffjson"
 	"github.com/valyala/fasthttp"
@@ -59,6 +60,15 @@ func (b *Betting) Request(reqStruct interface{}, url BetURL, method string, filt
 	err := fasthttp.Do(req, resp)
 	if err != nil {
 		return err
+	}
+
+	if resp.StatusCode() == 400 {
+		err = ffjson.Unmarshal(resp.Body(), &bettingError)
+		if err != nil {
+			return err
+		}
+
+		return fmt.Errorf("Error with code - %s and string - %s", bettingError.Faultcode, bettingError.Faultstring)
 	}
 
 	err = ffjson.Unmarshal(resp.Body(), reqStruct)
