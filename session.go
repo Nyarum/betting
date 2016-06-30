@@ -11,7 +11,7 @@ import (
 
 type Session struct {
 	SessionToken string
-	LoginStatus  string
+	LoginStatus  ELoginStatus
 }
 
 func (b *Betting) GetSession(pemCert, keyCert, login, password string) error {
@@ -48,17 +48,11 @@ func (b *Betting) GetSession(pemCert, keyCert, login, password string) error {
 		return err
 	}
 
-	var loginStatus LoginStatus
-	err = loginStatus.Check(session.LoginStatus)
-	if err != nil {
-		return err
-	}
-
-	switch loginStatus {
+	switch session.LoginStatus {
 	case LS_SUCCESS:
 		b.SessionKey = session.SessionToken
 	default:
-		err = errors.New(loginStatus.String())
+		err = errors.New(string(session.LoginStatus))
 	}
 
 	return err

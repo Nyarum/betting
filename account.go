@@ -81,24 +81,24 @@ func (b *Betting) GetAppKeys() (developAppKeys []DeveloperAppKey, err error) {
 }
 
 type StatementLegacyData struct {
-	AvgPrice        float64    `json:"omitempty"`
-	BetSize         float64    `json:"omitempty"`
-	BetType         string     `json:"omitempty"`
-	BetCategoryType string     `json:"omitempty"`
-	CommissionRate  string     `json:"omitempty"`
-	EventID         int64      `json:"omitempty"`
-	EventTypeID     int64      `json:"omitempty"`
-	FullMarketName  string     `json:"omitempty"`
-	GrossBetAmount  float64    `json:"omitempty"`
-	MarketName      string     `json:"omitempty"`
-	MarketType      MarketType `json:"omitempty"`
-	PlacedDate      time.Time  `json:"omitempty"`
-	SelectionID     int64      `json:"omitempty"`
-	SelectionName   string     `json:"omitempty"`
-	StartDate       time.Time  `json:"omitempty"`
-	TransactionType string     `json:"omitempty"`
-	TransactionID   int64      `json:"omitempty"`
-	WinLose         string     `json:"omitempty"`
+	AvgPrice        float64     `json:"omitempty"`
+	BetSize         float64     `json:"omitempty"`
+	BetType         string      `json:"omitempty"`
+	BetCategoryType string      `json:"omitempty"`
+	CommissionRate  string      `json:"omitempty"`
+	EventID         int64       `json:"omitempty"`
+	EventTypeID     int64       `json:"omitempty"`
+	FullMarketName  string      `json:"omitempty"`
+	GrossBetAmount  float64     `json:"omitempty"`
+	MarketName      string      `json:"omitempty"`
+	MarketType      EMarketType `json:"omitempty"`
+	PlacedDate      time.Time   `json:"omitempty"`
+	SelectionID     int64       `json:"omitempty"`
+	SelectionName   string      `json:"omitempty"`
+	StartDate       time.Time   `json:"omitempty"`
+	TransactionType string      `json:"omitempty"`
+	TransactionID   int64       `json:"omitempty"`
+	WinLose         string      `json:"omitempty"`
 }
 
 type StatementItem struct {
@@ -106,7 +106,7 @@ type StatementItem struct {
 	ItemDate      time.Time
 	Amount        float64             `json:"omitempty"`
 	Balance       float64             `json:"omitempty"`
-	ItemClass     ItemClass           `json:"omitempty"`
+	ItemClass     EItemClass          `json:"omitempty"`
 	ItemClassData map[string]string   `json:"omitempty"`
 	LegacyData    StatementLegacyData `json:"omitempty"`
 }

@@ -44,26 +44,26 @@ type PriceSize struct {
 }
 
 type CurrentOrderSummary struct {
-	BetID               string               `json:"betId"`
-	MarketID            string               `json:"marketId"`
-	SelectionID         int64                `json:"selectionId"`
-	Handicap            float64              `json:"handicap"`
-	PriceSize           PriceSize            `json:"priceSize"`
-	BspLiability        float64              `json:"bspLiability"`
-	Side                eSideInternal        `json:"side"`
-	Status              eOrderStatusInternal `json:"status"`
-	PersistenceType     PersistenceType      `json:"persistenceType"`
-	OrderType           OrderType            `json:"orderType"`
-	PlacedDate          time.Time            `json:"placedDate"`
-	MatchedDate         time.Time            `json:"matchedDate"`
-	AveragePriceMatched float64              `json:"averagePriceMatched,omitempty"`
-	SizeMatched         float64              `json:"sizeMatched,omitempty"`
-	SizeRemaining       float64              `json:"sizeRemaining,omitempty"`
-	SizeLapsed          float64              `json:"sizeLapsed,omitempty"`
-	SizeCancelled       float64              `json:"sizeCancelled,omitempty"`
-	SizeVoided          float64              `json:"sizeVoided,omitempty"`
-	RegulatorAuthCode   string               `json:"regulatorAuthCode,omitempty"`
-	RegulatorCode       string               `json:"regulatorCode,omitempty"`
+	BetID               string           `json:"betId"`
+	MarketID            string           `json:"marketId"`
+	SelectionID         int64            `json:"selectionId"`
+	Handicap            float64          `json:"handicap"`
+	PriceSize           PriceSize        `json:"priceSize"`
+	BspLiability        float64          `json:"bspLiability"`
+	Side                ESide            `json:"side"`
+	Status              EOrderStatus     `json:"status"`
+	PersistenceType     EPersistenceType `json:"persistenceType"`
+	OrderType           EOrderType       `json:"orderType"`
+	PlacedDate          time.Time        `json:"placedDate"`
+	MatchedDate         time.Time        `json:"matchedDate"`
+	AveragePriceMatched float64          `json:"averagePriceMatched,omitempty"`
+	SizeMatched         float64          `json:"sizeMatched,omitempty"`
+	SizeRemaining       float64          `json:"sizeRemaining,omitempty"`
+	SizeLapsed          float64          `json:"sizeLapsed,omitempty"`
+	SizeCancelled       float64          `json:"sizeCancelled,omitempty"`
+	SizeVoided          float64          `json:"sizeVoided,omitempty"`
+	RegulatorAuthCode   string           `json:"regulatorAuthCode,omitempty"`
+	RegulatorCode       string           `json:"regulatorCode,omitempty"`
 }
 
 type CurrentOrderSummaryReport struct {
@@ -93,28 +93,28 @@ type ItemDescription struct {
 }
 
 type ClearedOrderSummary struct {
-	EventTypeID     string          `json:"eventTypeId,omitempty"`
-	EventID         string          `json:"eventId,omitempty"`
-	MarketID        string          `json:"marketId,omitempty"`
-	SelectionID     int64           `json:"selectionId,omitempty"`
-	Handicap        float64         `json:"handicap,omitempty"`
-	BetID           string          `json:"betId,omitempty"`
-	PlacedDate      time.Time       `json:"placedDate,omitempty"`
-	PersistenceType PersistenceType `json:"persistenceType,omitempty"`
-	OrderType       OrderType       `json:"orderType,omitempty"`
-	Side            eSideInternal   `json:"side,omitempty"`
-	ItemDescription ItemDescription `json:"itemDescription,omitempty"`
-	BetOutcome      string          `json:"betOutcome,omitempty"`
-	PriceRequested  float64         `json:"priceRequested,omitempty"`
-	SettledDate     time.Time       `json:"settledDate,omitempty"`
-	LastMatchedDate time.Time       `json:"lastMatchedDate,omitempty"`
-	BetCount        int             `json:"betCount,omitempty"`
-	Commission      float64         `json:"commission,omitempty"`
-	PriceMatched    float64         `json:"priceMatched,omitempty"`
-	PriceReduced    bool            `json:"priceReduced,omitempty"`
-	SizeSettled     float64         `json:"sizeSettled,omitempty"`
-	Profit          float64         `json:"profit,omitempty"`
-	SizeCancelled   float64         `json:"sizeCancelled,omitempty"`
+	EventTypeID     string           `json:"eventTypeId,omitempty"`
+	EventID         string           `json:"eventId,omitempty"`
+	MarketID        string           `json:"marketId,omitempty"`
+	SelectionID     int64            `json:"selectionId,omitempty"`
+	Handicap        float64          `json:"handicap,omitempty"`
+	BetID           string           `json:"betId,omitempty"`
+	PlacedDate      time.Time        `json:"placedDate,omitempty"`
+	PersistenceType EPersistenceType `json:"persistenceType,omitempty"`
+	OrderType       EOrderType       `json:"orderType,omitempty"`
+	Side            ESide            `json:"side,omitempty"`
+	ItemDescription ItemDescription  `json:"itemDescription,omitempty"`
+	BetOutcome      string           `json:"betOutcome,omitempty"`
+	PriceRequested  float64          `json:"priceRequested,omitempty"`
+	SettledDate     time.Time        `json:"settledDate,omitempty"`
+	LastMatchedDate time.Time        `json:"lastMatchedDate,omitempty"`
+	BetCount        int              `json:"betCount,omitempty"`
+	Commission      float64          `json:"commission,omitempty"`
+	PriceMatched    float64          `json:"priceMatched,omitempty"`
+	PriceReduced    bool             `json:"priceReduced,omitempty"`
+	SizeSettled     float64          `json:"sizeSettled,omitempty"`
+	Profit          float64          `json:"profit,omitempty"`
+	SizeCancelled   float64          `json:"sizeCancelled,omitempty"`
 }
 
 type ClearedOrderSummaryReport struct {
@@ -189,22 +189,22 @@ type MarketCatalogue struct {
 }
 
 type MarketDescription struct {
-	PersistenceEnabled bool              `json:"persistenceEnabled,omitempty"`
-	BspMarket          bool              `json:"bspMarket,omitempty"`
-	MarketTime         time.Time         `json:"marketTime,omitempty"`
-	SuspendTime        time.Time         `json:"suspendTime,omitempty"`
-	SettleTime         time.Time         `json:"settleTime,omitempty"`
-	BettingType        MarketBettingType `json:"bettingType,omitempty"`
-	TurnInPlayEnabled  bool              `json:"turnInPlayEnabled,omitempty"`
-	MarketType         string            `json:"marketType,omitempty"`
-	Regulator          string            `json:"marketId,omitempty"`
-	MarketBaseRate     float64           `json:"marketBaseRate,omitempty"`
-	DiscountAllowed    bool              `json:"discountAllowed,omitempty"`
-	Wallet             string            `json:"wallet,omitempty"`
-	Rules              string            `json:"rules,omitempty"`
-	RulesHasDate       bool              `json:"rulesHasDate,omitempty"`
-	EachWayDivisor     float64           `json:"eachWayDivisor,omitempty"`
-	Clarifications     string            `json:"clarifications,omitempty"`
+	PersistenceEnabled bool               `json:"persistenceEnabled,omitempty"`
+	BspMarket          bool               `json:"bspMarket,omitempty"`
+	MarketTime         time.Time          `json:"marketTime,omitempty"`
+	SuspendTime        time.Time          `json:"suspendTime,omitempty"`
+	SettleTime         time.Time          `json:"settleTime,omitempty"`
+	BettingType        EMarketBettingType `json:"bettingType,omitempty"`
+	TurnInPlayEnabled  bool               `json:"turnInPlayEnabled,omitempty"`
+	MarketType         string             `json:"marketType,omitempty"`
+	Regulator          string             `json:"marketId,omitempty"`
+	MarketBaseRate     float64            `json:"marketBaseRate,omitempty"`
+	DiscountAllowed    bool               `json:"discountAllowed,omitempty"`
+	Wallet             string             `json:"wallet,omitempty"`
+	Rules              string             `json:"rules,omitempty"`
+	RulesHasDate       bool               `json:"rulesHasDate,omitempty"`
+	EachWayDivisor     float64            `json:"eachWayDivisor,omitempty"`
+	Clarifications     string             `json:"clarifications,omitempty"`
 }
 
 type RunnerCatalog struct {
