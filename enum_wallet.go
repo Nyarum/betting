@@ -1,8 +1,8 @@
 package betting
 
-type eWalletInternal string
+type EWallet string
 
 const (
-	W_UK  eWalletInternal = "UK"
-	W_AUS eWalletInternal = "AUSTRALIAN"
+	W_UK  EWallet = "UK"
+	W_AUS EWallet = "AUSTRALIAN"
 )

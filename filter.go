@@ -14,15 +14,15 @@ type RunnerID struct {
 }
 
 type Filter struct {
-	Wallet                       eWalletInternal          `json:"wallet,omitempty"`
+	Wallet                       EWallet                  `json:"wallet,omitempty"`
 	Locale                       string                   `json:"locale,omitempty"`
 	FromRecord                   int                      `json:"fromRecord,omitempty"`
 	RecordCount                  int                      `json:"recordCount,omitempty"`
 	ItemDateRange                *DateRange               `json:"itemDateRange,omitempty"`
 	IncludeItem                  eIncludeItemInternal     `json:"recordCount,omitempty"`
 	FromCurrency                 string                   `json:"fromCurrency,omitempty"`
-	From                         eWalletInternal          `json:"from,omitempty"`
-	To                           eWalletInternal          `json:"to,omitempty"`
+	From                         EWallet                  `json:"from,omitempty"`
+	To                           EWallet                  `json:"to,omitempty"`
 	Amount                       float64                  `json:"amount,omitempty"`
 	BetIDs                       []string                 `json:"betIds,omitempty"`
 	MarketIDs                    []string                 `json:"betIds,omitempty"`
