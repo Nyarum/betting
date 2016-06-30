@@ -63,7 +63,7 @@ func TestRequestAppKeys(t *testing.T) {
 	}
 
 	if config.Debug {
-		log.Println(keys)
+		log.Printf("TestRequestAppKeys\n %v \n\n", keys)
 	}
 }
 
@@ -83,7 +83,7 @@ func TestRequestAccountDetails(t *testing.T) {
 	}
 
 	if config.Debug {
-		log.Println(details)
+		log.Printf("TestRequestAccountDetails\n %v \n\n", details)
 	}
 }
 
@@ -97,13 +97,13 @@ func TestRequestAccountFunds(t *testing.T) {
 		t.Error(err)
 	}
 
-	funds, err := bet.GetAccountFunds(Filter{Wallet: EWallet.UK})
+	funds, err := bet.GetAccountFunds(Filter{Wallet: W_UK})
 	if err != nil {
 		t.Error(err)
 	}
 
 	if config.Debug {
-		log.Println(funds)
+		log.Printf("TestRequestAccountFunds\n %v \n\n", funds)
 	}
 }
 
