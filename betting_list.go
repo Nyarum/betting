@@ -232,7 +232,7 @@ type MarketProfitAndLoss struct {
 }
 
 type RunnerProfitAndLoss struct {
-	SelectionId string  `json:"selectionId,omitempty"`
+	SelectionId int64   `json:"selectionId,omitempty"`
 	IfWin       float64 `json:"ifWin,omitempty"`
 	IfLose      float64 `json:"ifLose,omitempty"`
 	IfPlace     float64 `json:"ifPlace,omitempty"`
@@ -271,6 +271,21 @@ type TimeRangeResult struct {
 // ListTimeRangeResult to get  a list of time ranges in the granularity specified in the request (i.e. 3PM to 4PM, Aug 14th to Aug 15th) associated with the markets selected by the MarketFilter.
 func (b *Betting) ListTimeRangeResult(filter Filter) (timeRangeResult []TimeRangeResult, err error) {
 	err = b.Request(&timeRangeResult, BettingURL, "listTimeRanges", &filter)
+	if err != nil {
+		return
+	}
+
+	return
+}
+
+type VenueResult struct {
+	Venue       string `json:"venue,omitempty"`
+	MarketCount int    `json:"marketCount,omitempty"`
+}
+
+// ListVenueResult to get a list of Venues (i.e. Cheltenham, Ascot) associated with the markets selected by the MarketFilter. Currently, only Horse Racing markets are associated with a Venue.
+func (b *Betting) ListVenueResult(filter Filter) (venueResult []VenueResult, err error) {
+	err = b.Request(&venueResult, BettingURL, "listVenues", &filter)
 	if err != nil {
 		return
 	}
