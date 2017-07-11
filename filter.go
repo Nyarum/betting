@@ -4,7 +4,7 @@ import "time"
 
 type DateRange struct {
 	From time.Time `json:"from,omitempty"`
-	To   time.Time `json:"from,omitempty"`
+	To   time.Time `json:"to,omitempty"`
 }
 
 type RunnerID struct {
