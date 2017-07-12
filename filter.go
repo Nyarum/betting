@@ -25,7 +25,7 @@ type Filter struct {
 	To                           EWallet            `json:"to,omitempty"`
 	Amount                       float64            `json:"amount,omitempty"`
 	BetIDs                       []string           `json:"betIds,omitempty"`
-	MarketIDs                    []string           `json:"betIds,omitempty"`
+	MarketIDs                    []string           `json:"marketIds,omitempty"`
 	OrderProjection              EOrderProjection   `json:"orderProjection,omitempty"`
 	DateRange                    *DateRange         `json:"dateRange,omitempty"`
 	OrderBy                      EOrderBy           `json:"orderBy,omitempty"`
@@ -41,7 +41,6 @@ type Filter struct {
 	IncludeItemDescription       bool               `json:"includeItemDescription,omitempty"`
 	MaxResults                   int                `json:"maxResults,omitempty"`
 	IncludeSettledBets           bool               `json:"includeSettledBets,omitempty"`
-	MarketProfitAndLossMarketIds []string           `json:"marketIds,omitempty"`
 	TimeGranularity              ETimeGranularity   `json:"granularity,omitempty"`
 	PlaceOrdersMarketID          string             `json:"marketId,omitempty"`
 	PlaceOrdersInstructions      []PlaceInstruction `json:"instructions,omitempty"`

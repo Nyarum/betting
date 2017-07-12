@@ -180,7 +180,7 @@ func TestRequestListMarketProfitAndLoss(t *testing.T) {
 	}
 
 	list, err := bet.ListMarketProfitAndLoss(Filter{
-		MarketProfitAndLossMarketIds: []string{"1.125821194"},
+		MarketIDs: []string{"1.125821194"},
 	})
 	if err != nil {
 		t.Error(err)
