@@ -9,12 +9,17 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
+type Client struct {
+	ApiKey     string
+	SessionKey string
+}
+
 type Session struct {
 	SessionToken string
 	LoginStatus  ELoginStatus
 }
 
-func (b *Betting) GetSession(pemCert, keyCert, login, password string) error {
+func (c *Client) GetSession(pemCert, keyCert, login, password string) error {
 	var session *Session = &Session{}
 
 	cert, err := tls.LoadX509KeyPair(pemCert, keyCert)
@@ -27,7 +32,7 @@ func (b *Betting) GetSession(pemCert, keyCert, login, password string) error {
 	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
 	req.SetRequestURI(CertURL)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	req.Header.Set("X-Application", b.ApiKey)
+	req.Header.Set("X-Application", c.ApiKey)
 	req.Header.SetMethod("POST")
 
 	bufferString := bytes.NewBuffer([]byte{})
@@ -50,7 +55,7 @@ func (b *Betting) GetSession(pemCert, keyCert, login, password string) error {
 
 	switch session.LoginStatus {
 	case LS_SUCCESS:
-		b.SessionKey = session.SessionToken
+		c.SessionKey = session.SessionToken
 	default:
 		err = errors.New(string(session.LoginStatus))
 	}
@@ -66,14 +71,14 @@ type KeepAlive struct {
 }
 
 // KeepAlive for support connect, session key will available for 20 minutes
-func (b *Betting) KeepAlive() error {
+func (c *Client) KeepAlive() error {
 	var keepAlive *KeepAlive = &KeepAlive{}
 
 	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
 	req.SetRequestURI(KeepAliveURL)
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("X-Application", b.ApiKey)
-	req.Header.Set("X-Authentication", b.SessionKey)
+	req.Header.Set("X-Application", c.ApiKey)
+	req.Header.Set("X-Authentication", c.SessionKey)
 	req.Header.SetMethod("POST")
 
 	err := fasthttp.Do(req, resp)
@@ -88,7 +93,7 @@ func (b *Betting) KeepAlive() error {
 
 	switch keepAlive.Status {
 	case "SUCCESS":
-		b.SessionKey = keepAlive.Token
+		c.SessionKey = keepAlive.Token
 	default:
 		err = errors.New(keepAlive.Error)
 	}
