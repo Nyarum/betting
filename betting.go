@@ -8,31 +8,12 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
-// BetURL type of all betfair urls
-type BetURL string
-
-const (
-	CertURL             = "https://identitysso-api.betfair.com/api/certlogin"
-	KeepAliveURL        = "https://identitysso.betfair.com/api/keepAlive"
-	AccountURL   BetURL = "https://api.betfair.com/exchange/account/rest/v1.0"
-	BettingURL   BetURL = "https://api.betfair.com/exchange/betting/rest/v1.0"
-)
-
-// Betting main struct of all method for working with betfair
 type Betting struct {
-	ApiKey     string
-	SessionKey string
-}
-
-// NewBet create pointer to Betting struct with base values
-func NewBet(apiKey string) *Betting {
-	return &Betting{
-		ApiKey: apiKey,
-	}
+	*Client
 }
 
 // Request function for send requests to betfair via REST JSON
-func (b *Betting) Request(reqStruct interface{}, url BetURL, method string, filter *Filter) error {
+func (b *Betting) Request(reqStruct interface{}, url BetfairRestURL, method string, filter *Filter) error {
 	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
 
 	urlBuild := bytes.NewBuffer([]byte{})
