@@ -260,8 +260,20 @@ type Runner struct {
 	MatchesByStrategy map[string][]Match `json:"matchesByStrategy,omitempty"`
 }
 
-type StartingPrices struct { /* TODO: Implement */ }
-type ExchangePrices struct { /* TODO: Implement */ }
+type StartingPrices struct {
+	NearPrice         float64     `json:"nearPrice,omitempty"`
+	FarPrice          float64     `json:"farPrice,omitempty"`
+	BackStakeTaken    []PriceSize `json:"backStakeTaken,omitempty"`
+	LayLiabilityTaken []PriceSize `json:"layLiabilityTaken,omitempty"`
+	ActualSP          float64     `json:"actualSP,omitempty"`
+}
+
+type ExchangePrices struct {
+	AvailableToBack []PriceSize `json:"availableToBack,omitempty"`
+	AvailableToLay  []PriceSize `json:"availableToLay,omitempty"`
+	TradedVolume    []PriceSize `json:"tradedVolume,omitempty"`
+}
+
 type Order struct { /* TODO: Implement */ }
 type Match struct { /* TODO: Implement */ }
 

@@ -26,6 +26,7 @@ type Filter struct {
 	Amount                       float64            `json:"amount,omitempty"`
 	BetIDs                       []string           `json:"betIds,omitempty"`
 	MarketIDs                    []string           `json:"marketIds,omitempty"`
+	PriceProjection              *PriceProjection   `json:"priceProjection,omitempty"`
 	OrderProjection              EOrderProjection   `json:"orderProjection,omitempty"`
 	DateRange                    *DateRange         `json:"dateRange,omitempty"`
 	OrderBy                      EOrderBy           `json:"orderBy,omitempty"`
@@ -44,4 +45,19 @@ type Filter struct {
 	TimeGranularity              ETimeGranularity   `json:"granularity,omitempty"`
 	PlaceOrdersMarketID          string             `json:"marketId,omitempty"`
 	PlaceOrdersInstructions      []PlaceInstruction `json:"instructions,omitempty"`
+}
+
+type PriceProjection struct {
+	PriceData             []EPriceData           `json:"priceData,omitempty"`
+	EXBestOffersOverrides *EXBestOffersOverrides `json:"exBestOffersOverrides,omitempty"`
+	Virtualise            bool                   `json:"virtualise,omitempty"`
+	RolloverStakes        bool                   `json:"rolloverStakes,omitempty"`
+}
+
+type EXBestOffersOverrides struct {
+	BestPricesDepth          int          `json:"bestPricesDepth,omitempty"`
+	RollupModel              ERollupModel `json:"rollupModel,omitempty"`
+	RollupLimit              int          `json:"rollupLimit,omitempty"`
+	RollupLiabilityThreshold float64      `json:"rollupLiabilityThreshold,omitempty"`
+	RollupLiabilityFactor    int          `json:"rollupLiabilityFactor,omitempty"`
 }
