@@ -225,6 +225,53 @@ func (b *Betting) ListMarketCatalogue(filter Filter) (marketCatalogue []MarketCa
 	return
 }
 
+type MarketBook struct {
+	MarketID              string        `json:"marketId,omitempty"`
+	IsMarketDataDelayed   bool          `json:"isMarketDataDelayed,omitempty"`
+	Status                EMarketStatus `json:"status,omitempty"`
+	BetDelay              int           `json:"betDelay,omitempty"`
+	BspReconciled         bool          `json:"bspReconciled,omitempty"`
+	Complete              bool          `json:"complete,omitempty"`
+	Inplay                bool          `json:"inplay,omitempty"`
+	NumberOfWinners       int           `json:"numberOfWinners,omitempty"`
+	NumberOfRunners       int           `json:"numberOfRunners,omitempty"`
+	NumberOfActiveRunners int           `json:"numberOfActiveRunners,omitempty"`
+	LastMatchTime         time.Time     `json:"lastMatchTime,omitempty"`
+	TotalMatched          float64       `json:"totalMatched,omitempty"`
+	TotalAvailable        float64       `json:"totalAvailable,omitempty"`
+	CrossMatching         bool          `json:"crossMatching,omitempty"`
+	RunnersVoidable       bool          `json:"runnersVoidable,omitempty"`
+	Version               int64         `json:"version,omitempty"`
+	Runners               []Runner      `json:"runners,omitempty"`
+}
+
+type Runner struct {
+	SelectionID       int64              `json:"selectionId,omitempty"`
+	Handicap          float64            `json:"handicap,omitempty"`
+	Status            ERunnerStatus      `json:"status,omitempty"`
+	AdjustmentFactor  float64            `json:"adjustmentFactor,omitempty"`
+	LastPriceTraded   float64            `json:"lastPriceTraded,omitempty"`
+	TotalMatched      float64            `json:"totalMatched,omitempty"`
+	RemovalDate       time.Time          `json:"removalDate,omitempty"`
+	SP                StartingPrices     `json:"sp,omitempty"`
+	EX                ExchangePrices     `json:"ex,omitempty"`
+	Orders            []Order            `json:"orders,omitempty"`
+	Matches           []Match            `json:"matches,omitempty"`
+	MatchesByStrategy map[string][]Match `json:"matchesByStrategy,omitempty"`
+}
+
+type StartingPrices struct { /* TODO: Implement */ }
+type ExchangePrices struct { /* TODO: Implement */ }
+type Order struct { /* TODO: Implement */ }
+type Match struct { /* TODO: Implement */ }
+
+// ListMarketBook to get a list of dynamic data about markets.
+func (b *Betting) ListMarketBook(filter Filter) (marketBook []MarketBook, err error) {
+	err = b.Request(&marketBook, BettingURL, "listMarketBook", &filter)
+
+	return
+}
+
 type MarketProfitAndLoss struct {
 	MarketId          string                `json:"marketId,omitempty"`
 	CommissionApplied float64               `json:"commissionApplied,omitempty"`
