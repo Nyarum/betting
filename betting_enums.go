@@ -82,6 +82,8 @@ const (
 	GB_MARKET         EGroupBy = "MARKET"
 	GB_SIDE           EGroupBy = "SIDE"
 	GB_BET            EGroupBy = "BET"
+	GB_RUNNER         EGroupBy = "RUNNER"
+	GB_STRATEGY       EGroupBy = "STRATEGY"
 	ErrUnknownGroupBy EGroupBy = "Unknown groupBy value"
 )
 
