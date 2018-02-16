@@ -16,14 +16,15 @@ func TestRequestPlaceOrders(t *testing.T) {
 	}
 
 	list, err := bet.PlaceOrders(Filter{
-		PlaceOrdersMarketID: "1.111836557",
+		PlaceOrdersMarketID: "1.139017587",
 		PlaceOrdersInstructions: []PlaceInstruction{
 			PlaceInstruction{
-				SelectionID: 5404312,
-				Side:        S_BACK,
+				SelectionID: 256171,
+				Side:        S_LAY,
+				Handicap:    0,
 				OrderType:   OT_MARKET_ON_CLOSE,
 				MarketOnCloseOrder: MarketOnCloseOrder{
-					Liability: 2,
+					Liability: 1,
 				},
 			},
 		},

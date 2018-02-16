@@ -4,17 +4,16 @@ package betting
 type BetfairRestURL string
 
 const (
-	CertURL                   = "https://identitysso-api.betfair.com/api/certlogin"
-	KeepAliveURL              = "https://identitysso.betfair.com/api/keepAlive"
-	AccountURL BetfairRestURL = "https://api.betfair.com/exchange/account/rest/v1.0"
-	BettingURL BetfairRestURL = "https://api.betfair.com/exchange/betting/rest/v1.0"
-	ScoresURL                 = "https://api.betfair.com/exchange/scores/json-rpc/v1"
+	CertURL                     = "https://identitysso-api.betfair.com/api/certlogin"
+	KeepAliveURL                = "https://identitysso.betfair.com/api/keepAlive"
+	AccountURL   BetfairRestURL = "https://api.betfair.com/exchange/account/rest/v1.0"
+	BettingURL   BetfairRestURL = "https://api.betfair.com/exchange/betting/rest/v1.0"
+	ScoresURL                   = "https://api.betfair.com/exchange/scores/json-rpc/v1"
 )
 
 type Betfair struct {
 	*Client
 	*Betting
-	*Scores
 }
 
 func NewBetfair(apikey string) *Betfair {
@@ -22,9 +21,8 @@ func NewBetfair(apikey string) *Betfair {
 	client := Client{ApiKey: apikey}
 
 	return &Betfair{
-		Client: &client,
+		Client:  &client,
 		Betting: &Betting{&client},
-		Scores:  &Scores{&client},
 	}
 }
 

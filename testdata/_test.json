@@ -1,8 +1,8 @@
 {
-	"api_key": "string",
-	"login": "string",
-	"password": "string",
-	"cert_pem": "path",
-	"cert_key": "path",
-	"debug": false
+  "api_key": "Nm4RristnKRwalbr",
+  "login": "greg@seesawlabs.com",
+  "password": "NKjVfRt383iMDp14CSaV",
+  "cert_pem": "/home/nyarum/client-2048.pem",
+  "cert_key": "/home/nyarum/client-2048.key",
+  "debug": false
 }

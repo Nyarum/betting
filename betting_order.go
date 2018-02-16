@@ -5,7 +5,7 @@ import "time"
 type PlaceInstruction struct {
 	OrderType          EOrderType         `json:"orderType,omitempty"`
 	SelectionID        int64              `json:"selectionId,omitempty"`
-	Handicap           float64            `json:"handicap,omitempty"`
+	Handicap           float64            `json:"handicap"`
 	Side               ESide              `json:"side,omitempty"`
 	LimitOrder         LimitOrder         `json:"limitOrder,omitempty"`
 	LimitOnCloseOrder  LimitOnCloseOrder  `json:"limitOnCloseOrder,omitempty"`
