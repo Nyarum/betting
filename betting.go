@@ -35,7 +35,7 @@ func (b *Betting) Request(reqStruct interface{}, url BetfairRestURL, method stri
 			return err
 		}
 
-		fmt.Println(string(filterBody))
+//		fmt.Println(string(filterBody))
 
 		req.SetBody(filterBody)
 	}
