@@ -19,13 +19,8 @@ type Session struct {
 	LoginStatus  ELoginStatus
 }
 
-func (c *Client) GetSession(pemCert, keyCert, login, password string) error {
+func (c *Client) GetSessionFromCertificate(cert tls.Certificate, login, password string) error {
 	var session *Session = &Session{}
-
-	cert, err := tls.LoadX509KeyPair(pemCert, keyCert)
-	if err != nil {
-		return err
-	}
 
 	client := fasthttp.Client{TLSConfig: &tls.Config{Certificates: []tls.Certificate{cert}, InsecureSkipVerify: true}}
 
@@ -43,7 +38,7 @@ func (c *Client) GetSession(pemCert, keyCert, login, password string) error {
 
 	req.SetBody(bufferString.Bytes())
 
-	err = client.Do(req, resp)
+	err := client.Do(req, resp)
 	if err != nil {
 		return err
 	}
@@ -61,6 +56,15 @@ func (c *Client) GetSession(pemCert, keyCert, login, password string) error {
 	}
 
 	return err
+}
+
+func (c *Client) GetSession(pemCert, keyCert, login, password string) error {
+	cert, err := tls.LoadX509KeyPair(pemCert, keyCert)
+	if err != nil {
+		return err
+	}
+
+	return c.GetSessionFromCertificate(cert, login, password)
 }
 
 type KeepAlive struct {
