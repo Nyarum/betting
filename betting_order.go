@@ -1,11 +1,21 @@
 package betting
 
-import "time"
+import (
+	"time"
+	"fmt"
+)
+
+
+type Decimal float64
+
+func (n Decimal) MarshalJSON() ([]byte, error) {
+    return []byte(fmt.Sprintf("%.2f", n)), nil
+}
 
 type PlaceInstruction struct {
 	OrderType          EOrderType         `json:"orderType,omitempty"`
 	SelectionID        int64              `json:"selectionId,omitempty"`
-	Handicap           float64            `json:"handicap"`
+	Handicap           Decimal            `json:"handicap,omitempty"`
 	Side               ESide              `json:"side,omitempty"`
 	LimitOrder         LimitOrder         `json:"limitOrder,omitempty"`
 	LimitOnCloseOrder  LimitOnCloseOrder  `json:"limitOnCloseOrder,omitempty"`
@@ -33,22 +43,22 @@ type PlaceInstructionReport struct {
 }
 
 type LimitOrder struct {
-	Size            float64          `json:"size,omitempty"`
-	Price           float64          `json:"price,omitempty"`
+	Size            Decimal          `json:"size,omitempty"`
+	Price           Decimal          `json:"price,omitempty"`
 	PersistenceType EPersistenceType `json:"persistenceType,omitempty"`
 	TimeInForce     ETimeInForce     `json:"timeInForce,omitempty"`
-	MinFillSize     float64          `json:"minFillSize,omitempty"`
+	MinFillSize     Decimal          `json:"minFillSize,omitempty"`
 	BetTargetType   EBetTargetType   `json:"betTargetType,omitempty"`
-	BetTargetSize   float64          `json:"betTargetSize,omitempty"`
+	BetTargetSize   Decimal          `json:"betTargetSize,omitempty"`
 }
 
 type LimitOnCloseOrder struct {
-	Liability float64 `json:"liability,omitempty"`
-	Price     float64 `json:"price,omitempty"`
+	Liability Decimal `json:"liability,omitempty"`
+	Price     Decimal `json:"price,omitempty"`
 }
 
 type MarketOnCloseOrder struct {
-	Liability float64 `json:"liability,omitempty"`
+	Liability Decimal `json:"liability,omitempty"`
 }
 
 // PlaceOrders to place new orders into market.
