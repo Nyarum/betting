@@ -13,7 +13,7 @@ type Betting struct {
 }
 
 // Request function for send requests to betfair via REST JSON
-func (b *Betting) Request(reqStruct interface{}, url BetfairRestURL, method string, filter *Filter) error {
+func (b *Betting) Request(reqStruct interface{}, url BetfairRestURL, method string, filter interface{}) error {
 	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
 
 	urlBuild := bytes.NewBuffer([]byte{})
