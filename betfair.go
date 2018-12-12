@@ -4,7 +4,7 @@ package betting
 type BetfairRestURL string
 
 const (
-	CertURL                     = "https://identitysso-api.betfair.com/api/certlogin"
+	CertURL                     = "https://identitysso-cert.betfair.com/api/certlogin"
 	KeepAliveURL                = "https://identitysso.betfair.com/api/keepAlive"
 	AccountURL   BetfairRestURL = "https://api.betfair.com/exchange/account/rest/v1.0"
 	BettingURL   BetfairRestURL = "https://api.betfair.com/exchange/betting/rest/v1.0"
