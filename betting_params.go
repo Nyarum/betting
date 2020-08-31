@@ -65,3 +65,9 @@ type Filter struct {
 	CustomerOrderRefs            []string             `json:"customerOrderRefs,omitempty"`
 	CustomerStrategyRefs         []string             `json:"customerStrategyRefs,omitempty"`
 }
+
+type CancelFilter struct {
+	MarketID                    string             `json:"marketId"`
+	CancelOrdersInstructions	[]CancelInstruction  `json:"instructions"` 		
+	CustomerRef            		string             	`json:"customerRef,omitempty"`
+}
