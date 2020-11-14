@@ -10,6 +10,8 @@ import (
 
 type Betting struct {
 	*Client
+	BettingURL BetfairRestURL
+	AccountURL BetfairRestURL
 }
 
 // Request function for send requests to betfair via REST JSON
@@ -25,7 +27,7 @@ func (b *Betting) Request(reqStruct interface{}, url BetfairRestURL, method stri
 	req.SetRequestURI(urlBuild.String())
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Connection","keep-alive")
+	req.Header.Set("Connection", "keep-alive")
 	req.Header.Set("X-Application", b.ApiKey)
 	req.Header.Set("X-Authentication", b.SessionKey)
 	req.Header.SetMethod("POST")
@@ -36,7 +38,7 @@ func (b *Betting) Request(reqStruct interface{}, url BetfairRestURL, method stri
 			return err
 		}
 
-//		fmt.Println(string(filterBody))
+		//		fmt.Println(string(filterBody))
 
 		req.SetBody(filterBody)
 	}

@@ -21,7 +21,7 @@ type DeveloperAppKey struct {
 
 // CreateAppKeys for create new developer app keys in account
 func (b *Betting) CreateAppKeys() (developAppKeys []DeveloperAppKey, err error) {
-	err = b.Request(&developAppKeys, AccountURL, "createDeveloperAppKeys", nil)
+	err = b.Request(&developAppKeys, b.AccountURL, "createDeveloperAppKeys", nil)
 	if err != nil {
 		return
 	}
@@ -43,7 +43,7 @@ type AccountDetails struct {
 
 // GetAccountDetails like get account details :)
 func (b *Betting) GetAccountDetails() (accountDetails AccountDetails, err error) {
-	err = b.Request(&accountDetails, AccountURL, "getAccountDetails", nil)
+	err = b.Request(&accountDetails, b.AccountURL, "getAccountDetails", nil)
 	if err != nil {
 		return
 	}
@@ -62,7 +62,7 @@ type AccountFunds struct {
 
 // GetAccountFunds for getting balances of account
 func (b *Betting) GetAccountFunds(filter Filter) (accountFunds AccountFunds, err error) {
-	err = b.Request(&accountFunds, AccountURL, "getAccountFunds", &filter)
+	err = b.Request(&accountFunds, b.AccountURL, "getAccountFunds", &filter)
 	if err != nil {
 		return
 	}
@@ -72,7 +72,7 @@ func (b *Betting) GetAccountFunds(filter Filter) (accountFunds AccountFunds, err
 
 // GetAppKeys for getting all developer keys from account
 func (b *Betting) GetAppKeys() (developAppKeys []DeveloperAppKey, err error) {
-	err = b.Request(&developAppKeys, AccountURL, "getDeveloperAppKeys", nil)
+	err = b.Request(&developAppKeys, b.AccountURL, "getDeveloperAppKeys", nil)
 	if err != nil {
 		return
 	}
@@ -118,7 +118,7 @@ type AccountStatementReport struct {
 
 // GetAccountStatement about get account statements for 90 days
 func (b *Betting) GetAccountStatement(filter Filter) (accountStatementReport AccountStatementReport, err error) {
-	err = b.Request(&accountStatementReport, AccountURL, "getAccountStatement", &filter)
+	err = b.Request(&accountStatementReport, b.AccountURL, "getAccountStatement", &filter)
 	if err != nil {
 		return
 	}
@@ -133,7 +133,7 @@ type CurrencyRate struct {
 
 // GetListCurrencyRates for get currency rates for hour
 func (b *Betting) GetListCurrencyRates(filter Filter) (currencyRate []CurrencyRate, err error) {
-	err = b.Request(&currencyRate, AccountURL, "listCurrencyRates", &filter)
+	err = b.Request(&currencyRate, b.AccountURL, "listCurrencyRates", &filter)
 	if err != nil {
 		return
 	}
@@ -147,7 +147,7 @@ type TransferResponse struct {
 
 // GetTransferFunds for transfer funds between UK and AUS wallets
 func (b *Betting) GetTransferFunds(filter Filter) (transferResponse TransferResponse, err error) {
-	err = b.Request(&transferResponse, AccountURL, "transferFunds", &filter)
+	err = b.Request(&transferResponse, b.AccountURL, "transferFunds", &filter)
 	if err != nil {
 		return
 	}
