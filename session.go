@@ -10,8 +10,10 @@ import (
 )
 
 type Client struct {
-	ApiKey     string
-	SessionKey string
+	ApiKey       string
+	SessionKey   string
+	CertURL      BetfairRestURL
+	KeepAliveURL BetfairRestURL
 }
 
 type Session struct {
@@ -25,7 +27,7 @@ func (c *Client) GetSessionFromCertificate(cert tls.Certificate, login, password
 	client := fasthttp.Client{TLSConfig: &tls.Config{Certificates: []tls.Certificate{cert}, InsecureSkipVerify: true}}
 
 	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
-	req.SetRequestURI(CertURL)
+	req.SetRequestURI(string(c.CertURL))
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Set("X-Application", c.ApiKey)
 	req.Header.SetMethod("POST")
@@ -79,7 +81,7 @@ func (c *Client) KeepAlive() error {
 	var keepAlive *KeepAlive = &KeepAlive{}
 
 	req, resp := fasthttp.AcquireRequest(), fasthttp.AcquireResponse()
-	req.SetRequestURI(KeepAliveURL)
+	req.SetRequestURI(string(c.KeepAliveURL))
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("X-Application", c.ApiKey)
 	req.Header.Set("X-Authentication", c.SessionKey)

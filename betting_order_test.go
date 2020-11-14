@@ -23,7 +23,7 @@ func TestRequestPlaceOrders(t *testing.T) {
 				Side:        S_LAY,
 				Handicap:    0,
 				OrderType:   OT_MARKET_ON_CLOSE,
-				MarketOnCloseOrder: MarketOnCloseOrder{
+				MarketOnCloseOrder: &MarketOnCloseOrder{
 					Liability: 1,
 				},
 			},

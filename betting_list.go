@@ -15,7 +15,7 @@ type CompetitionResult struct {
 
 // ListCompetitions to get competitions associated with the markets selected by the filter
 func (b *Betting) ListCompetitions(filter Filter) (competitionResults []CompetitionResult, err error) {
-	err = b.Request(&competitionResults, BettingURL, "listCompetitions", &filter)
+	err = b.Request(&competitionResults, b.BettingURL, "listCompetitions", &filter)
 	if err != nil {
 		return
 	}
@@ -30,7 +30,7 @@ type CountryCodeResult struct {
 
 // ListCountries to get a list of countries associated with the markets selected by the filter
 func (b *Betting) ListCountries(filter Filter) (countryCodeResults []CountryCodeResult, err error) {
-	err = b.Request(&countryCodeResults, BettingURL, "listCountries", &filter)
+	err = b.Request(&countryCodeResults, b.BettingURL, "listCountries", &filter)
 	if err != nil {
 		return
 	}
@@ -73,7 +73,7 @@ type CurrentOrderSummaryReport struct {
 
 // ListCurrentOrders to get a list of your current orders
 func (b *Betting) ListCurrentOrders(filter Filter) (currentOrderSummaryReport CurrentOrderSummaryReport, err error) {
-	err = b.Request(&currentOrderSummaryReport, BettingURL, "listCurrentOrders", &filter)
+	err = b.Request(&currentOrderSummaryReport, b.BettingURL, "listCurrentOrders", &filter)
 	if err != nil {
 		return
 	}
@@ -126,7 +126,7 @@ type ClearedOrderSummaryReport struct {
 
 // ListClearedOrders to get a list of settled bets based on the bet status, ordered by settled date
 func (b *Betting) ListClearedOrders(filter Filter) (clearedOrderSummaryReport ClearedOrderSummaryReport, err error) {
-	err = b.Request(&clearedOrderSummaryReport, BettingURL, "listClearedOrders", &filter)
+	err = b.Request(&clearedOrderSummaryReport, b.BettingURL, "listClearedOrders", &filter)
 	if err != nil {
 		return
 	}
@@ -150,7 +150,7 @@ type EventResult struct {
 
 // ListEvents to get a list of all events
 func (b *Betting) ListEvents(filter Filter) (eventResult []EventResult, err error) {
-	err = b.Request(&eventResult, BettingURL, "listEvents", &filter)
+	err = b.Request(&eventResult, b.BettingURL, "listEvents", &filter)
 	if err != nil {
 		return
 	}
@@ -170,7 +170,7 @@ type EventTypeResult struct {
 
 // ListEventTypes to get a list of all event types
 func (b *Betting) ListEventTypes(filter Filter) (eventTypeResult []EventTypeResult, err error) {
-	err = b.Request(&eventTypeResult, BettingURL, "listEventTypes", &filter)
+	err = b.Request(&eventTypeResult, b.BettingURL, "listEventTypes", &filter)
 	if err != nil {
 		return
 	}
@@ -219,7 +219,7 @@ type RunnerCatalog struct {
 
 // ListMarketCatalogue to get a list of information about published (ACTIVE/SUSPENDED) markets that does not change (or changes very rarely).
 func (b *Betting) ListMarketCatalogue(filter Filter) (marketCatalogue []MarketCatalogue, err error) {
-	err = b.Request(&marketCatalogue, BettingURL, "listMarketCatalogue", &filter)
+	err = b.Request(&marketCatalogue, b.BettingURL, "listMarketCatalogue", &filter)
 	if err != nil {
 		return
 	}
@@ -276,12 +276,14 @@ type ExchangePrices struct {
 	TradedVolume    []PriceSize `json:"tradedVolume,omitempty"`
 }
 
-type Order struct { /* TODO: Implement */ }
-type Match struct { /* TODO: Implement */ }
+type Order struct { /* TODO: Implement */
+}
+type Match struct { /* TODO: Implement */
+}
 
 // ListMarketBook to get a list of dynamic data about markets.
 func (b *Betting) ListMarketBook(filter Filter) (marketBook []MarketBook, err error) {
-	err = b.Request(&marketBook, BettingURL, "listMarketBook", &filter)
+	err = b.Request(&marketBook, b.BettingURL, "listMarketBook", &filter)
 
 	return
 }
@@ -301,7 +303,7 @@ type RunnerProfitAndLoss struct {
 
 // ListMarketProfitAndLoss Retrieve profit and loss for a given list of OPEN markets.
 func (b *Betting) ListMarketProfitAndLoss(filter Filter) (marketProfitAndLoss []MarketProfitAndLoss, err error) {
-	err = b.Request(&marketProfitAndLoss, BettingURL, "listMarketProfitAndLoss", &filter)
+	err = b.Request(&marketProfitAndLoss, b.BettingURL, "listMarketProfitAndLoss", &filter)
 	if err != nil {
 		return
 	}
@@ -316,7 +318,7 @@ type MarketTypeResult struct {
 
 // ListMarketTypes to get a list of market types (i.e. MATCH_ODDS, NEXT_GOAL) associated with the markets selected by the MarketFilter.
 func (b *Betting) ListMarketTypes(filter Filter) (marketTypeResult []MarketTypeResult, err error) {
-	err = b.Request(&marketTypeResult, BettingURL, "listMarketTypes", &filter)
+	err = b.Request(&marketTypeResult, b.BettingURL, "listMarketTypes", &filter)
 	if err != nil {
 		return
 	}
@@ -331,7 +333,7 @@ type TimeRangeResult struct {
 
 // ListTimeRangeResult to get  a list of time ranges in the granularity specified in the request (i.e. 3PM to 4PM, Aug 14th to Aug 15th) associated with the markets selected by the MarketFilter.
 func (b *Betting) ListTimeRangeResult(filter Filter) (timeRangeResult []TimeRangeResult, err error) {
-	err = b.Request(&timeRangeResult, BettingURL, "listTimeRanges", &filter)
+	err = b.Request(&timeRangeResult, b.BettingURL, "listTimeRanges", &filter)
 	if err != nil {
 		return
 	}
@@ -346,7 +348,7 @@ type VenueResult struct {
 
 // ListVenueResult to get a list of Venues (i.e. Cheltenham, Ascot) associated with the markets selected by the MarketFilter. Currently, only Horse Racing markets are associated with a Venue.
 func (b *Betting) ListVenueResult(filter Filter) (venueResult []VenueResult, err error) {
-	err = b.Request(&venueResult, BettingURL, "listVenues", &filter)
+	err = b.Request(&venueResult, b.BettingURL, "listVenues", &filter)
 	if err != nil {
 		return
 	}
